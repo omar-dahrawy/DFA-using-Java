@@ -19,6 +19,8 @@ For example, the DFA for which the state diagram appears below may have the foll
 This representation translates to: 
 - First triple: at state 0, input 0 goes to state 0, and input 1 goes to state 1.
 - Second triple: at state 1, input 0 goes to state 2, and input 1 goes to state 1.
-and so on.
+- Third triple: at state 2, input 0 goes to state 0, and input 1 goes to state 3.
+- Fourth triple: at state 3, input 0 goes to state 3, and input 1 goes to state 3.
+- 1 and 3 are the only accept states.
 
 ![Screen shot](Documentation/Screen-shot.jpg)
