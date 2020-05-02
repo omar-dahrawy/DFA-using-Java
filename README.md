@@ -13,3 +13,5 @@ S is a comma-separated sequence of states.
 
 For example, the DFA for which the state diagram appears below may have the following string representation:
 0,0,1;1,2,1;2,0,3;3,3,3#1,3
+
+![Screen shot](Documentation/Screen-shot.jpg)
