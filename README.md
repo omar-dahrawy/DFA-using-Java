@@ -18,7 +18,7 @@ For example, the DFA for which the state diagram appears below may have the foll
 
 This representation translates to: 
 - First triple: at state 0, input 0 goes to state 0, and input 1 goes to state 1.
-- Seconf triple: at state 1, input 0 goes to state 2, and input 1 goes to state 1.
+- Second triple: at state 1, input 0 goes to state 2, and input 1 goes to state 1.
 and so on.
 
 ![Screen shot](Documentation/Screen-shot.jpg)
