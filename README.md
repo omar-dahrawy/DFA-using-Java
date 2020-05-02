@@ -3,7 +3,7 @@
 ## Description
 
 This program simulates a DFA using Java. 
-The program takes as input a String representation of a DFA, followed by String inputs from the alphabet {0,1}. The program then returns either True if the String belongs to the language of the DFA, or False if it doesn't. The program can be edited to support more alphabets.
+The program takes as input a String representation of a DFA, followed by String inputs from the alphabet {0,1}. The program then returns either True if the String belongs to the language of the DFA, or False if it doesn't. The program can be edited to support more alphabets. To run the program, simply enter your DFA representation String in the main method.
 
 ## DFA String representation
 
