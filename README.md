@@ -15,6 +15,7 @@ S is a comma-separated sequence of states (the accept states).
 
 For example, the DFA for which the state diagram appears below may have the following string representation:
 0,0,1;1,2,1;2,0,3;3,3,3#1,3
+
 This representation translates to: 
 - First triple: at state 0, input 0 goes to state 0, and input 1 goes to state 1.
 - Seconf triple: at state 1, input 0 goes to state 2, and input 1 goes to state 1.
