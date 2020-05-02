@@ -8,7 +8,9 @@ The program takes as input a String representation of a DFA, followed by String 
 ## DFA String representation
 
 A string describing a DFA is of the form P#S, where P is a prefix representing the transition functions and S is a suffix representing the set F of accept states.
+
 P is a semicolon-separated sequence of triples of states; each triple is a comma-separated sequence of states. A triple i,j,k means that δ(i,0) = j and δ(i,1) = k.
+
 S is a comma-separated sequence of states.
 
 For example, the DFA for which the state diagram appears below may have the following string representation:
