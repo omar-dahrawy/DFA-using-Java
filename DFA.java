@@ -4,28 +4,42 @@ import java.util.Scanner;
 
 public class DFA {
 	
-	public ArrayList<String> states;
-	public String acceptStates;
+	public ArrayList<String> transitions; 		// This ArrayList contains the states transitions
+	public ArrayList<String> acceptStates;      // This String comtains the accept states
+	public int currentState;         			// Pointer to the current state
 	public boolean result;
-	public int currentState;
+	
+	/*
+	 *   The constructor parses the representation string into the data structures defined above
+	 */
 	
 	public DFA(String representation) {
 		
-		states = new ArrayList<String>();
-		acceptStates = "";
+		transitions = new ArrayList<String>();
+		acceptStates = new ArrayList<String>();
 		result = false;
-		currentState = 0;
+		currentState = 0; // State 0 the is start state
 		
-		int index = 0;
-		states.add(representation.substring(index+2,index+5));
+		String prefix = representation.split("#")[0];
+		String suffix = representation.split("#")[1];
 		
-		for(index+=6 ; index < representation.length()-4 ; index+=6) {
-			states.add(representation.substring(index+2,index+5));
+		/*
+		 * Skipping the first two indices, which are the state number and ','
+		 * 
+		 * Given a triple i,j,k where i is the state number, j is the transition of input 0, and k is the transition of input 1,
+		 * "j,k" is added to the index i of the ArrayList transitions
+		 * 
+		 */
+
+		for(int index = 0 ; index < prefix.split(";").length ; index++) {
+			transitions.add(prefix.split(";")[index].substring(2,prefix.split(";")[index].length()));
 		}
 		
-		acceptStates = (representation.substring(representation.indexOf('#')+1,representation.length()));
+		for(int index = 0 ; index < suffix.split(",").length ; index++) {
+			acceptStates.add(suffix.split(",")[index]);
+		}
 		
-		PrintArray(states);
+		PrintTransitions();
 		System.out.println("Accept States: " + acceptStates);
 		
 		Scanner scanner = new Scanner(System.in);
@@ -37,19 +51,32 @@ public class DFA {
 		
 	}
 	
+	/*
+	 *  Runs the input string against the generated DFA to check if it belongs to the language of the DFA
+	 */
+	
 	public boolean Run(String input) {
 		
 		System.out.println("\nStart State: " + currentState);
 		
-		for(int i = 0 ; i < input.length() ; i++) {
-			if(input.substring(i, i+1).equals("0")) {
-				currentState = Integer.parseInt(((states.get(currentState).charAt(0))+""));
-			}
-			else if(input.substring(i, i+1).equals("1")) {
-				currentState = Integer.parseInt(((states.get(currentState).charAt(2))+""));
+		int previousState = 0;
+		
+		for(int index = 0 ; index < input.length() ; index++) {
+			
+			// If next letter in input is 0
+			
+			if(input.substring(index, index+1).equals("0")) {
+				previousState = currentState;
+				currentState = Integer.parseInt(((transitions.get(currentState).charAt(0))+""));
 			}
 			
-			System.out.println("Current State: " + currentState);
+			// Else if next letter in input is 1
+			
+			else if(input.substring(index, index+1).equals("1")) {
+				currentState = Integer.parseInt(((transitions.get(currentState).charAt(2))+""));
+			}
+			
+			System.out.println("δ(" + previousState+","+input.substring(index, index+1) + ") = " + currentState);
 			
 			if(acceptStates.contains(currentState+"")) 
 				result = true;
@@ -57,16 +84,21 @@ public class DFA {
 				result = false;
 			
 		}
+		
+		System.out.println("End state: " + currentState);
+		
 		return result;
 	}
 	
+	/*
+	 *   Displays the transition functions to verify the representation string
+	 */
 
-	
-	public void PrintArray(ArrayList<String> list) {
-		for(int i = 0 ; i < list.size() ; i++) {
-			System.out.println(list.get(i));
+	public void PrintTransitions() {
+		for(int index = 0 ; index < transitions.size() ; index++) {
+			System.out.println("δ("+index+","+0+") = "+transitions.get(index).substring(0,1));
+			System.out.println("δ("+index+","+1+") = "+transitions.get(index).substring(2,3));
 		}
-		System.out.println("\n--------------\n");
 	}
 	
 	public static void main(String [] args) {
